@@ -10,16 +10,21 @@ function App() {
   const [employees, setEmployees] = useState(employeesData);
   const [searchQuery, setSearchQuery] = useState('');
   const [editingEmployee, setEditingEmployee] = useState(null);
+
+  const [nextId, setNextId] = useState(
+    employeesData.length > 0 ? Math.max(...employeesData.map(emp => emp.id)) + 1 : 1
+  );
+
   const filteredEmployees = employees.filter((employee) => {
     const employeeString = Object.values(employee).join(' ').toLowerCase();
     return employeeString.includes(searchQuery.toLowerCase());
   });
 
-
   const handleAddEmployee = (newEmployee) => {
-    setEmployees((prevEmployees) => [...prevEmployees, newEmployee]);
+    const newEmployeeWithId = { id: nextId, ...newEmployee };
+    setEmployees((prevEmployees) => [...prevEmployees, newEmployeeWithId]);
+    setNextId(nextId + 1);
   };
-
 
   const handleUpdateEmployee = (updatedEmployee) => {
     setEmployees((prevEmployees) =>
@@ -29,7 +34,6 @@ function App() {
     );
     setEditingEmployee(null);
   };
-
 
   const handleCancelEdit = () => {
     setEditingEmployee(null);

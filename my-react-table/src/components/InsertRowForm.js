@@ -27,7 +27,6 @@ function InsertRowForm({ onAddEmployee }) {
         }
 
         const newEmployee = {
-            id: Date.now(),
             name: formData.name,
             position: formData.position,
             department: formData.department,
