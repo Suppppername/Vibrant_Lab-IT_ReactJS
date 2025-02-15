@@ -1,20 +1,49 @@
 import React from 'react';
 
-function SearchBar({ searchQuery, setSearchQuery }) {
+function SearchBar({ searchQuery, setSearchQuery, searchAttribute, setSearchAttribute }) {
     return (
-        <div style={{ marginBottom: '1rem' }}>
-            <label htmlFor="search" style={{ marginRight: '0.5rem' }}>
-                Search:
-            </label>
+        <div style={searchContainer}>
+            <select
+                style={dropdownStyle}
+                value={searchAttribute}
+                onChange={(e) => setSearchAttribute(e.target.value)}
+            >
+                <option value="all">All</option>
+                <option value="id">ID</option>
+                <option value="name">Name</option>
+                <option value="position">Position</option>
+                <option value="department">Department</option>
+                <option value="age">Age</option>
+                <option value="salary">Salary</option>
+                <option value="experience">Experience</option>
+            </select>
+
             <input
-                id="search"
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Type to filter..."
+                placeholder={`Search by ${searchAttribute === "all" ? "any attribute" : searchAttribute}...`}
+                style={inputStyle}
             />
         </div>
     );
 }
+
+const searchContainer = {
+    display: 'flex',
+    gap: '10px',
+    marginBottom: '20px',
+};
+
+const dropdownStyle = {
+    padding: '8px',
+    fontSize: '14px',
+};
+
+const inputStyle = {
+    padding: '8px',
+    fontSize: '14px',
+    flex: '1',
+};
 
 export default SearchBar;

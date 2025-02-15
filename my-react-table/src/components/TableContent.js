@@ -11,7 +11,7 @@ function TableContent({ employees, onEditClick, onSort, sortConfig }) {
             <table style={tableStyle}>
                 <thead>
                     <tr>
-                        {["name", "position", "department", "age", "salary", "experience"].map((column) => (
+                        {["id", "name", "position", "department", "age", "salary", "experience"].map((column) => (
                             <th key={column} onClick={() => onSort(column)} style={thStyle}>
                                 <span style={headerContainerStyle}>
                                     {column.charAt(0).toUpperCase() + column.slice(1)}
@@ -26,12 +26,13 @@ function TableContent({ employees, onEditClick, onSort, sortConfig }) {
                     {employees.length > 0 ? (
                         employees.map((emp) => (
                             <tr key={emp.id} style={trStyle}>
-                                <td style={tdStyle} data-label="Name">{emp.name}</td>
-                                <td style={tdStyle} data-label="Position">{emp.position}</td>
-                                <td style={tdStyle} data-label="Department">{emp.department}</td>
-                                <td style={tdStyle} data-label="Age">{emp.age}</td>
-                                <td style={tdStyle} data-label="Salary">{emp.salary}</td>
-                                <td style={tdStyle} data-label="Experience">{emp.experience}</td>
+                                <td style={tdStyle}>{emp.id}</td>
+                                <td style={tdStyle}>{emp.name}</td>
+                                <td style={tdStyle}>{emp.position}</td>
+                                <td style={tdStyle}>{emp.department}</td>
+                                <td style={tdStyle}>{emp.age}</td>
+                                <td style={tdStyle}>{emp.salary}</td>
+                                <td style={tdStyle}>{emp.experience}</td>
                                 <td style={tdStyle}>
                                     <button style={editButtonStyle} onClick={() => onEditClick(emp)}>Edit</button>
                                 </td>

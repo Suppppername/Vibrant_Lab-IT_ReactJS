@@ -8,6 +8,7 @@ import employeesData from './data';
 function App() {
   const [employees, setEmployees] = useState(employeesData);
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchAttribute, setSearchAttribute] = useState('all');
   const [editingEmployee, setEditingEmployee] = useState(null);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'ascending' });
 
@@ -16,8 +17,13 @@ function App() {
   );
 
   const filteredEmployees = employees.filter((employee) => {
-    const employeeString = Object.values(employee).join(' ').toLowerCase();
-    return employeeString.includes(searchQuery.toLowerCase());
+    if (!searchQuery) return true;
+
+    const value = searchAttribute === "all"
+      ? Object.values(employee).join(' ').toLowerCase()
+      : String(employee[searchAttribute]).toLowerCase();
+
+    return value.includes(searchQuery.toLowerCase());
   });
 
   const handleAddEmployee = (newEmployee) => {
@@ -32,10 +38,6 @@ function App() {
         emp.id === updatedEmployee.id ? updatedEmployee : emp
       )
     );
-    setEditingEmployee(null);
-  };
-
-  const handleCancelEdit = () => {
     setEditingEmployee(null);
   };
 
@@ -59,15 +61,23 @@ function App() {
     <div style={{ maxWidth: '800px', margin: '0 auto', padding: '1rem' }}>
       <h1>React.js Table with Search, Insert, Edit, and Sorting</h1>
 
-      <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <SearchBar
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        searchAttribute={searchAttribute}
+        setSearchAttribute={setSearchAttribute}
+      />
+
       <InsertRowForm onAddEmployee={handleAddEmployee} />
+
       {editingEmployee && (
         <EditRowForm
           employee={editingEmployee}
           onUpdateEmployee={handleUpdateEmployee}
-          onCancelEdit={handleCancelEdit}
+          onCancelEdit={() => setEditingEmployee(null)}
         />
       )}
+
       <TableContent
         employees={filteredEmployees}
         onEditClick={setEditingEmployee}
