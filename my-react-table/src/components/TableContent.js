@@ -1,6 +1,6 @@
 import React from 'react';
 
-function TableContent({ employees, onEditClick, onSort, sortConfig }) {
+function TableContent({ employees, onEditClick, onDeleteClick, onSort, sortConfig }) {
     const getSortIndicator = (column) => {
         if (!sortConfig || sortConfig.key !== column) return '↕';
         return sortConfig.direction === 'ascending' ? '↑' : '↓';
@@ -34,7 +34,8 @@ function TableContent({ employees, onEditClick, onSort, sortConfig }) {
                                 <td style={tdStyle}>{emp.salary}</td>
                                 <td style={tdStyle}>{emp.experience}</td>
                                 <td style={tdStyle}>
-                                    <button style={editButtonStyle} onClick={() => onEditClick(emp)}>Edit</button>
+                                    <button style={actionButtonStyle} onClick={() => onEditClick(emp)}>Edit</button>
+                                    <button style={actionButtonStyle} onClick={() => onDeleteClick(emp.id)}>Delete</button>
                                 </td>
                             </tr>
                         ))
@@ -90,7 +91,7 @@ const headerContainerStyle = {
     gap: '5px',
 };
 
-const editButtonStyle = {
+const actionButtonStyle = {
     padding: '5px 10px',
     fontSize: '12px',
     cursor: 'pointer',
@@ -98,6 +99,7 @@ const editButtonStyle = {
     backgroundColor: '#007bff',
     color: 'white',
     border: 'none',
+    marginRight: '5px',
 };
 
 export default TableContent;

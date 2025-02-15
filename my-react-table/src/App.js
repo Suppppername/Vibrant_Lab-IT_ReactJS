@@ -41,6 +41,23 @@ function App() {
     setEditingEmployee(null);
   };
 
+  const handleDeleteEmployee = (id) => {
+    setEmployees((prevEmployees) => prevEmployees.filter(emp => emp.id !== id));
+  };
+
+  const handleExportCSV = () => {
+    const csvContent = "data:text/csv;charset=utf-8,"
+      + ["ID,Name,Position,Department,Age,Salary,Experience"].join(",") + "\n"
+      + employees.map(e => `${e.id},${e.name},${e.position},${e.department},${e.age},${e.salary},${e.experience}`).join("\n");
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "employees.csv");
+    document.body.appendChild(link);
+    link.click();
+  };
+
   const handleSort = (key) => {
     let direction = 'ascending';
     if (sortConfig.key === key && sortConfig.direction === 'ascending') {
@@ -59,7 +76,7 @@ function App() {
 
   return (
     <div style={{ maxWidth: '800px', margin: '0 auto', padding: '1rem' }}>
-      <h1>React.js Table with Search, Insert, Edit, and Sorting</h1>
+      <h1>React.js Table with Search, Insert, Edit, Delete, and Export</h1>
 
       <SearchBar
         searchQuery={searchQuery}
@@ -78,14 +95,27 @@ function App() {
         />
       )}
 
+      <button onClick={handleExportCSV} style={exportButtonStyle}>Export CSV</button>
+
       <TableContent
         employees={filteredEmployees}
         onEditClick={setEditingEmployee}
+        onDeleteClick={handleDeleteEmployee}
         onSort={handleSort}
         sortConfig={sortConfig}
       />
     </div>
   );
 }
+
+const exportButtonStyle = {
+  padding: '10px 15px',
+  backgroundColor: '#28a745',
+  color: 'white',
+  border: 'none',
+  fontSize: '16px',
+  cursor: 'pointer',
+  marginBottom: '10px'
+};
 
 export default App;
