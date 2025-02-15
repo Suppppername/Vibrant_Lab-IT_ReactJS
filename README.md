@@ -1,4 +1,14 @@
-# Report: https://www.notion.so/Report-on-React-JS-Project-19aaf5f1482d8088a927f248f9210c2b?pvs=4
+## To Start the project
+cd to ~/Vibrant_Lab-IT_ReactJS/my-react-table
+```
+npm install
+npm start
+```
+
+[Project Report](https://www.notion.so/Report-on-React-JS-Project-19aaf5f1482d8088a927f248f9210c2b?pvs=4)
+
+
+
 
 # React.js Table Content Page with Search Bar, Insert, and Edit Row Features
 
