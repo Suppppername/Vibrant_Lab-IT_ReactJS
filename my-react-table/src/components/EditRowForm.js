@@ -52,7 +52,7 @@ function EditRowForm({ employee, onUpdateEmployee, onCancelEdit }) {
         onUpdateEmployee(updatedEmployee);
     };
 
-    if (!employee) return null; // or a loading state
+    if (!employee) return null;
 
     return (
         <form onSubmit={handleSubmit} style={{ marginBottom: '2rem' }}>
