@@ -26,12 +26,12 @@ function TableContent({ employees, onEditClick, onSort, sortConfig }) {
                     {employees.length > 0 ? (
                         employees.map((emp) => (
                             <tr key={emp.id} style={trStyle}>
-                                <td style={tdStyle}>{emp.name}</td>
-                                <td style={tdStyle}>{emp.position}</td>
-                                <td style={tdStyle}>{emp.department}</td>
-                                <td style={tdStyle}>{emp.age}</td>
-                                <td style={tdStyle}>{emp.salary}</td>
-                                <td style={tdStyle}>{emp.experience}</td>
+                                <td style={tdStyle} data-label="Name">{emp.name}</td>
+                                <td style={tdStyle} data-label="Position">{emp.position}</td>
+                                <td style={tdStyle} data-label="Department">{emp.department}</td>
+                                <td style={tdStyle} data-label="Age">{emp.age}</td>
+                                <td style={tdStyle} data-label="Salary">{emp.salary}</td>
+                                <td style={tdStyle} data-label="Experience">{emp.experience}</td>
                                 <td style={tdStyle}>
                                     <button style={editButtonStyle} onClick={() => onEditClick(emp)}>Edit</button>
                                 </td>
@@ -50,7 +50,6 @@ function TableContent({ employees, onEditClick, onSort, sortConfig }) {
     );
 }
 
-// 📌 **Final Responsive Styles for Full-Width Table**
 const tableContainerStyle = {
     width: '100%',
     display: 'flex',
@@ -59,25 +58,25 @@ const tableContainerStyle = {
 
 const tableStyle = {
     width: '100%',
-    maxWidth: '1200px', // Keep it wide but within a limit
+    maxWidth: '100%',
     borderCollapse: 'collapse',
-    tableLayout: 'auto', // Allows columns to resize based on content
+    tableLayout: 'fixed',
 };
 
 const thStyle = {
     border: '1px solid #ddd',
-    padding: '12px',
+    padding: '8px',
     textAlign: 'left',
     cursor: 'pointer',
     whiteSpace: 'nowrap',
-    fontSize: '16px',
+    fontSize: '14px',
 };
 
 const tdStyle = {
     border: '1px solid #ddd',
-    padding: '12px',
-    fontSize: '16px',
-    wordWrap: 'break-word', // Allow text wrapping instead of overflowing
+    padding: '8px',
+    fontSize: '14px',
+    wordWrap: 'break-word',
 };
 
 const trStyle = {
@@ -87,14 +86,14 @@ const trStyle = {
 const headerContainerStyle = {
     display: 'flex',
     alignItems: 'center',
-    gap: '8px',
+    gap: '5px',
 };
 
 const editButtonStyle = {
-    padding: '6px 12px',
-    fontSize: '14px',
+    padding: '5px 10px',
+    fontSize: '12px',
     cursor: 'pointer',
-    borderRadius: '5px',
+    borderRadius: '4px',
     backgroundColor: '#007bff',
     color: 'white',
     border: 'none',
