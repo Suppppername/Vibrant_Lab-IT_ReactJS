@@ -1,23 +1,23 @@
 import React from 'react';
 
-function TableContent({ employees, onEditClick }) {
+function TableContent({ employees, onEditClick, onSort, sortConfig }) {
+    const getSortIndicator = (column) => {
+        if (!sortConfig || sortConfig.key !== column) return '↕'; // Default indicator
+        return sortConfig.direction === 'ascending' ? '↑' : '↓';
+    };
+
     return (
-        <table
-            style={{
-                width: '100%',
-                borderCollapse: 'collapse',
-                marginBottom: '2rem'
-            }}
-        >
+        <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '2rem' }}>
             <thead>
                 <tr style={{ backgroundColor: '#f2f2f2' }}>
-                    <th style={thStyle}>ID</th>
-                    <th style={thStyle}>Name</th>
-                    <th style={thStyle}>Position</th>
-                    <th style={thStyle}>Department</th>
-                    <th style={thStyle}>Age</th>
-                    <th style={thStyle}>Salary</th>
-                    <th style={thStyle}>Experience</th>
+                    {["id", "name", "position", "department", "age", "salary", "experience"].map((column) => (
+                        <th key={column} onClick={() => onSort(column)} style={thStyle}>
+                            <span style={headerContainerStyle}>
+                                {column.charAt(0).toUpperCase() + column.slice(1)} {/* Capitalize first letter */}
+                                <span>{getSortIndicator(column)}</span>
+                            </span>
+                        </th>
+                    ))}
                     <th style={thStyle}>Actions</th>
                 </tr>
             </thead>
@@ -52,12 +52,19 @@ function TableContent({ employees, onEditClick }) {
 const thStyle = {
     border: '1px solid #ddd',
     padding: '8px',
-    textAlign: 'left'
+    textAlign: 'left',
+    cursor: 'pointer',
 };
 
 const tdStyle = {
     border: '1px solid #ddd',
-    padding: '8px'
+    padding: '8px',
+};
+
+const headerContainerStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '5px', // Space between text and arrow
 };
 
 export default TableContent;
