@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Table Component
 function TableContent({ employees, onEditClick, onDeleteClick, onSort, sortConfig }) {
     const getSortIndicator = (column) => {
         if (!sortConfig || sortConfig.key !== column) return '↕';
@@ -52,6 +53,7 @@ function TableContent({ employees, onEditClick, onDeleteClick, onSort, sortConfi
     );
 }
 
+// Styles
 const tableContainerStyle = {
     width: '100%',
     display: 'flex',

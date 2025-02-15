@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Search Bar Component
 function SearchBar({ searchQuery, setSearchQuery, searchAttribute, setSearchAttribute }) {
     return (
         <div style={searchContainer}>
@@ -29,6 +30,7 @@ function SearchBar({ searchQuery, setSearchQuery, searchAttribute, setSearchAttr
     );
 }
 
+// Styles
 const searchContainer = {
     display: 'flex',
     gap: '10px',

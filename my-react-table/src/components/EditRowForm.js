@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+// Edit Row Form Component
 function EditRowForm({ employee, onUpdateEmployee, onCancelEdit }) {
     const [formData, setFormData] = useState({
         name: '',
@@ -55,77 +56,56 @@ function EditRowForm({ employee, onUpdateEmployee, onCancelEdit }) {
     if (!employee) return null;
 
     return (
-        <form onSubmit={handleSubmit} style={{ marginBottom: '2rem' }}>
+        <form onSubmit={handleSubmit} style={formStyle}>
             <h2>Edit Employee (ID: {employee.id})</h2>
 
-            <div style={{ marginBottom: '0.5rem' }}>
+            <div style={inputGroup}>
                 <label>Name: </label>
-                <input
-                    name="name"
-                    type="text"
-                    value={formData.name}
-                    onChange={handleChange}
-                />
+                <input name="name" type="text" value={formData.name} onChange={handleChange} />
             </div>
 
-            <div style={{ marginBottom: '0.5rem' }}>
+            <div style={inputGroup}>
                 <label>Position: </label>
-                <input
-                    name="position"
-                    type="text"
-                    value={formData.position}
-                    onChange={handleChange}
-                />
+                <input name="position" type="text" value={formData.position} onChange={handleChange} />
             </div>
 
-            <div style={{ marginBottom: '0.5rem' }}>
+            <div style={inputGroup}>
                 <label>Department: </label>
-                <input
-                    name="department"
-                    type="text"
-                    value={formData.department}
-                    onChange={handleChange}
-                />
+                <input name="department" type="text" value={formData.department} onChange={handleChange} />
             </div>
 
-            <div style={{ marginBottom: '0.5rem' }}>
+            <div style={inputGroup}>
                 <label>Age: </label>
-                <input
-                    name="age"
-                    type="number"
-                    value={formData.age}
-                    onChange={handleChange}
-                />
+                <input name="age" type="number" value={formData.age} onChange={handleChange} />
             </div>
 
-            <div style={{ marginBottom: '0.5rem' }}>
+            <div style={inputGroup}>
                 <label>Salary: </label>
-                <input
-                    name="salary"
-                    type="number"
-                    value={formData.salary}
-                    onChange={handleChange}
-                />
+                <input name="salary" type="number" value={formData.salary} onChange={handleChange} />
             </div>
 
-            <div style={{ marginBottom: '0.5rem' }}>
+            <div style={inputGroup}>
                 <label>Experience: </label>
-                <input
-                    name="experience"
-                    type="number"
-                    value={formData.experience}
-                    onChange={handleChange}
-                />
+                <input name="experience" type="number" value={formData.experience} onChange={handleChange} />
             </div>
 
-            <button type="submit" style={{ marginRight: '0.5rem' }}>
-                Update Employee
-            </button>
-            <button type="button" onClick={onCancelEdit}>
-                Cancel
-            </button>
+            <button type="submit" style={buttonStyle}>Update Employee</button>
+            <button type="button" onClick={onCancelEdit} style={buttonStyle}>Cancel</button>
         </form>
     );
 }
+
+// Styles
+const formStyle = {
+    marginBottom: '2rem'
+};
+
+const inputGroup = {
+    marginBottom: '0.5rem'
+};
+
+const buttonStyle = {
+    marginRight: '0.5rem'
+};
 
 export default EditRowForm;

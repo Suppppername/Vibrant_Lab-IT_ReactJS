@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+// Insert Row Form Component
 function InsertRowForm({ onAddEmployee }) {
     const [formData, setFormData] = useState({
         name: '',
@@ -48,74 +49,51 @@ function InsertRowForm({ onAddEmployee }) {
     };
 
     return (
-        <form onSubmit={handleSubmit} style={{ marginBottom: '2rem' }}>
+        <form onSubmit={handleSubmit} style={formStyle}>
             <h2>Insert New Employee</h2>
 
-            <div style={{ marginBottom: '0.5rem' }}>
+            <div style={inputGroup}>
                 <label>Name: </label>
-                <input
-                    name="name"
-                    type="text"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                />
+                <input name="name" type="text" value={formData.name} onChange={handleChange} required />
             </div>
 
-            <div style={{ marginBottom: '0.5rem' }}>
+            <div style={inputGroup}>
                 <label>Position: </label>
-                <input
-                    name="position"
-                    type="text"
-                    value={formData.position}
-                    onChange={handleChange}
-                    required
-                />
+                <input name="position" type="text" value={formData.position} onChange={handleChange} required />
             </div>
 
-            <div style={{ marginBottom: '0.5rem' }}>
+            <div style={inputGroup}>
                 <label>Department: </label>
-                <input
-                    name="department"
-                    type="text"
-                    value={formData.department}
-                    onChange={handleChange}
-                />
+                <input name="department" type="text" value={formData.department} onChange={handleChange} />
             </div>
 
-            <div style={{ marginBottom: '0.5rem' }}>
+            <div style={inputGroup}>
                 <label>Age: </label>
-                <input
-                    name="age"
-                    type="number"
-                    value={formData.age}
-                    onChange={handleChange}
-                />
+                <input name="age" type="number" value={formData.age} onChange={handleChange} />
             </div>
 
-            <div style={{ marginBottom: '0.5rem' }}>
+            <div style={inputGroup}>
                 <label>Salary: </label>
-                <input
-                    name="salary"
-                    type="number"
-                    value={formData.salary}
-                    onChange={handleChange}
-                />
+                <input name="salary" type="number" value={formData.salary} onChange={handleChange} />
             </div>
 
-            <div style={{ marginBottom: '0.5rem' }}>
+            <div style={inputGroup}>
                 <label>Experience: </label>
-                <input
-                    name="experience"
-                    type="number"
-                    value={formData.experience}
-                    onChange={handleChange}
-                />
+                <input name="experience" type="number" value={formData.experience} onChange={handleChange} />
             </div>
 
             <button type="submit">Add Employee</button>
         </form>
     );
 }
+
+// Styles
+const formStyle = {
+    marginBottom: '2rem'
+};
+
+const inputGroup = {
+    marginBottom: '0.5rem'
+};
 
 export default InsertRowForm;

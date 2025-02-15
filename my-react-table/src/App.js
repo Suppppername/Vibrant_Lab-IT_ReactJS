@@ -6,16 +6,20 @@ import TableContent from './components/TableContent';
 import employeesData from './data';
 
 function App() {
+
+  // State management
   const [employees, setEmployees] = useState(employeesData);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchAttribute, setSearchAttribute] = useState('all');
   const [editingEmployee, setEditingEmployee] = useState(null);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'ascending' });
 
+  // Self-incrementing ID for new employees
   const [nextId, setNextId] = useState(
     employeesData.length > 0 ? Math.max(...employeesData.map(emp => emp.id)) + 1 : 1
   );
 
+  // Filtering employees based on search query and selected attribute
   const filteredEmployees = employees.filter((employee) => {
     if (!searchQuery) return true;
 
@@ -26,12 +30,14 @@ function App() {
     return value.includes(searchQuery.toLowerCase());
   });
 
+  // Adds a new employee with a unique ID
   const handleAddEmployee = (newEmployee) => {
     const newEmployeeWithId = { id: nextId, ...newEmployee };
     setEmployees((prevEmployees) => [...prevEmployees, newEmployeeWithId]);
     setNextId(nextId + 1);
   };
 
+  // Updates an existing employee
   const handleUpdateEmployee = (updatedEmployee) => {
     setEmployees((prevEmployees) =>
       prevEmployees.map((emp) =>
@@ -41,10 +47,12 @@ function App() {
     setEditingEmployee(null);
   };
 
+  // Deletes an employee by ID
   const handleDeleteEmployee = (id) => {
     setEmployees((prevEmployees) => prevEmployees.filter(emp => emp.id !== id));
   };
 
+  // Exports employee data to a CSV file
   const handleExportCSV = () => {
     const csvContent = "data:text/csv;charset=utf-8,"
       + ["ID,Name,Position,Department,Age,Salary,Experience"].join(",") + "\n"
@@ -58,6 +66,7 @@ function App() {
     link.click();
   };
 
+  // Handles sorting by column
   const handleSort = (key) => {
     let direction = 'ascending';
     if (sortConfig.key === key && sortConfig.direction === 'ascending') {
@@ -84,7 +93,6 @@ function App() {
         searchAttribute={searchAttribute}
         setSearchAttribute={setSearchAttribute}
       />
-
       <InsertRowForm onAddEmployee={handleAddEmployee} />
 
       {editingEmployee && (
@@ -108,6 +116,7 @@ function App() {
   );
 }
 
+// Button styling
 const exportButtonStyle = {
   padding: '10px 15px',
   backgroundColor: '#28a745',
